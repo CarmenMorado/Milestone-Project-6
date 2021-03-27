@@ -10,16 +10,10 @@ import UIKit
 
 class Target: SKNode {
     var charNode: SKSpriteNode!
-    var randomImage: String!
-    
-    var firstTargetCount: Int = 0
-    var secondTargetCount: Int = 0
-    var birdCount: Int = 0
 
     var isHit = false
     
     func configure(at position: CGPoint) {
-        
         self.position = position
         
         if Int.random(in: 0...2) == 0 {
@@ -79,4 +73,10 @@ class Target: SKNode {
             }
         }
     }
+    
+    func hit() {
+        isHit = true
+        
+        charNode.run(SKAction.fadeAlpha(to: 0, duration: 0.5))
+   }
 }
