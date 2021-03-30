@@ -16,7 +16,7 @@ class Target: SKNode {
     func configure(at position: CGPoint) {
         self.position = position
         
-        if Int.random(in: 0...2) == 0 {
+         if Int.random(in: 0...2) == 0 {
             charNode = SKSpriteNode(imageNamed: "FirstTarget")
             charNode.name = "FirstTarget"
         }
