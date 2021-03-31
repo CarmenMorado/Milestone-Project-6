@@ -10,7 +10,7 @@ import UIKit
 
 class Target: SKNode {
     var charNode: SKSpriteNode!
-
+    
     var isHit = false
     
     func configure(at position: CGPoint) {
@@ -22,7 +22,8 @@ class Target: SKNode {
         }
         
         else if Int.random(in: 0...1) == 1 {
-            charNode = SKSpriteNode(imageNamed: "SecondTarget")
+            charNode = SKSpriteNode(imageNamed: "FirstTarget")
+            charNode.size = CGSize(width: 40, height: 40)
             charNode.name = "SecondTarget"
         }
         
@@ -79,4 +80,5 @@ class Target: SKNode {
         
         charNode.run(SKAction.fadeAlpha(to: 0, duration: 0.5))
    }
+
 }
