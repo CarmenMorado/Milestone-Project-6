@@ -13,6 +13,8 @@ class GameScene: SKScene {
     var timer: SKLabelNode!
     var finalScore: SKLabelNode!
     var gameTimer: Timer?
+    var touchCount: Int = 0
+    var reload: SKLabelNode!
     
     var score = 0 {
         didSet {
@@ -20,7 +22,7 @@ class GameScene: SKScene {
         }
     }
     
-    var secondsRemaining = 10 {
+    var secondsRemaining = 30 {
         didSet {
             timer.text = "Time Left: \(secondsRemaining)"
         }
@@ -38,7 +40,6 @@ class GameScene: SKScene {
         gameScore.position = CGPoint(x: 8, y: 8)
         gameScore.horizontalAlignmentMode = .left
         gameScore.fontSize = 48
-        gameScore.name = "gameScore"
         addChild(gameScore)
         
         timer = SKLabelNode(fontNamed: "Chalkduster")
@@ -46,7 +47,6 @@ class GameScene: SKScene {
         timer.position = CGPoint (x: 8, y: 80)
         timer.horizontalAlignmentMode = .left
         timer.fontSize = 48
-        timer.name = "timer"
         addChild(timer)
         
         for i in 0 ..< 4 { createTarget(at: CGPoint(x: 130 + (i * 250), y: 570)) }
@@ -58,6 +58,28 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        
+        if reload != nil {
+            reload.removeFromParent()
+        }
+   
+        if touchCount == 6 {
+            reload = SKLabelNode(fontNamed: "Chalkduster")
+            reload.text = "Tap on the screen to reload."
+            reload.position = CGPoint (x: 500, y: 500)
+            reload.horizontalAlignmentMode = .center
+            reload.fontSize = 48
+            addChild(reload)
+            touchCount = -1
+            return
+        }
+        
+        touchCount += 1
+        
+        if touchCount == 0 {
+            return
+        }
+        
         let location = touch.location(in: self)
         let tappedNodes = nodes(at: location)
         
@@ -92,27 +114,31 @@ class GameScene: SKScene {
         secondsRemaining -= 1
         
         if secondsRemaining == 0 {
-            gameTimer?.invalidate()
-            
-            self.removeAllChildren()
-            
-            let background = SKSpriteNode(imageNamed: "landscape")
-            background.position = CGPoint(x: 512, y: 384)
-            background.blendMode = .replace
-            background.zPosition = -1
-            addChild(background)
-            
-            let gameOver = SKSpriteNode(imageNamed: "gameOver")
-            gameOver.position = CGPoint(x: 512, y: 384)
-            gameOver.zPosition = 1
-            addChild(gameOver)
-            
-            finalScore = SKLabelNode(fontNamed: "Chalkduster")
-            finalScore.text = "Final Score: \(score)"
-            finalScore.position = CGPoint(x: 512, y: 300)
-            finalScore.zPosition = 1
-            finalScore.fontSize = 48
-            addChild(finalScore)
+            gameOver()
         }
+    }
+    
+    func gameOver() {
+        gameTimer?.invalidate()
+        
+        self.removeAllChildren()
+        
+        let background = SKSpriteNode(imageNamed: "landscape")
+        background.position = CGPoint(x: 512, y: 384)
+        background.blendMode = .replace
+        background.zPosition = -1
+        addChild(background)
+        
+        let gameOver = SKSpriteNode(imageNamed: "gameOver")
+        gameOver.position = CGPoint(x: 512, y: 384)
+        gameOver.zPosition = 1
+        addChild(gameOver)
+        
+        finalScore = SKLabelNode(fontNamed: "Chalkduster")
+        finalScore.text = "Final Score: \(score)"
+        finalScore.position = CGPoint(x: 512, y: 300)
+        finalScore.zPosition = 1
+        finalScore.fontSize = 48
+        addChild(finalScore)
     }
 }

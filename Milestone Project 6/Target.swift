@@ -77,8 +77,11 @@ class Target: SKNode {
     
     func hit() {
         isHit = true
-        
-        charNode.run(SKAction.fadeAlpha(to: 0, duration: 0.5))
-   }
-
+        let fadeAlpha = SKAction.fadeAlpha(to: 0, duration: 0.5)
+        let removeNode = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([fadeAlpha, removeNode])
+        charNode.run(sequence)
+    }
 }
+
+
