@@ -13,5 +13,10 @@ Try going to https://openclipart.org/ to see what free artwork you can find.
 Give the user six bullets per clip. Make them tap a different part of the screen to reload.
 
 
-![ezgif-1-dc8952eb230a](https://user-images.githubusercontent.com/42749527/113363967-5b019900-9320-11eb-80a0-05da6b3690a7.gif)
+![milestone6](https://user-images.githubusercontent.com/42749527/114915372-75904380-9df1-11eb-8d1c-705f3193fee5.jpg)
+![Webp net-resizeimage (2)](https://user-images.githubusercontent.com/42749527/114915421-88a31380-9df1-11eb-8d4b-01a258a99dba.jpg)
+![gameover](https://user-images.githubusercontent.com/42749527/114915495-a1132e00-9df1-11eb-9fe5-3d7b4f6ea80a.jpg)
+
+
+
 
